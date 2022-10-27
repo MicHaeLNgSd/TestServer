@@ -5,7 +5,7 @@ const express = require("express"),
   (routes = require("./routes.js")),
   (mongoose = require("mongoose")),
   (User = require("./models/UserModels"));
-const swaggerUi = require("swagger-node-express");
+const swaggerUi = require("swagger-ui-express");
 const swaggerDoc = require("swagger-jsdoc");
 
 mongoose.connect("mongodb://127.0.0.1:27017/users_db");
