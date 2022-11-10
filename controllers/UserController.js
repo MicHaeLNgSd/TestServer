@@ -25,7 +25,43 @@ exports.addUser = function (req, res) {
   console.log(req);
   newUser.save((err, user) => {
     if (err) res.send(err);
-
     res.json(user);
   });
 };
+exports.removeUser = (req, res) => {
+  user.remove(
+    {
+      _id:req.params.userId,
+    },
+    (err,user) => {
+      if (err) res.send(err);
+      res.json({message:"User successful deleted"});
+    }
+  );
+}
+exports.updateUser = (req,res) => {
+  user.findOneAndUpdate(
+  {
+    _id:req.params.userId,
+  },
+  req.body,
+  {
+    new: true
+  },
+  (err,user) => {
+    if (err) res.send(err);
+    res.json(user);
+  }
+  );
+}
+exports.getUsersByAge = (req,res) => {
+  user.find(
+  {
+    age:{$gte:req.params.from, $lte:req.params.to}
+  },
+  (err,users) => {
+    if (err) res.send(err);
+    res.json(users);
+  }
+  );
+}
