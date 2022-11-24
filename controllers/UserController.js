@@ -6,7 +6,9 @@ exports.getListOfUsers = function (req, res) {
     if (err) res.send(err);
 
     res.json(users);
-  });
+  })
+  .sort({"name": -1});
+  //.sort({age: -1});
 };
 exports.getUsersByName = function (req, res) {
   user.find(
@@ -64,4 +66,37 @@ exports.getUsersByAge = (req,res) => {
     res.json(users);
   }
   );
+}
+exports.removeEmptyDocument = (req,res) => {
+  user.remove(
+    {
+      name: {$exists:false}
+    }, (err,users) => {
+      if (err) res.status(404).send(err);
+      res.status(200)
+      .json({message:"successful"});
+    })
+}
+
+exports.addFieldHeight = (req,res) => {
+  user.updateMany({},{$set:{height:170}},
+  
+    (err,users) => {
+      if (err)
+        res.status(404).send(err);
+      res.status(200).json({message:"successful"});
+  })
+}
+
+
+exports.getHeightestUser = (req,res) => {
+  user.find(
+  {},
+  (err,users) => {
+    if (err) res.send(err);
+    res.json(users);
+  }
+  )
+  .sort({"height": -1})
+  .limit(1);
 }

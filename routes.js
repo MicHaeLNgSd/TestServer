@@ -30,4 +30,7 @@ module.exports = function (app) {
   app.delete("/user/:userId", userController.removeUser);
   app.put("/user/:userId", userController.updateUser);
   app.get("/user/user-by-age/:from/:to", userController.getUsersByAge);
+  app.delete("/remove-empty-document", userController.removeEmptyDocument);
+  app.put("/add-height", userController.addFieldHeight);
+  app.get("/heightest", userController.getHeightestUser);
 };
